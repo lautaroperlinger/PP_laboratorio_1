@@ -14,8 +14,8 @@
 #include "Pedido.h"
 #include "Informes.h"
 #include "Funciones.h"
-#define TAM 5
-#define TAMPE 10
+#define TAM 100
+#define TAMPE 1000
 #define TAMCAD 51
 int main(void) {
 	setbuf(stdout,NULL);
@@ -43,12 +43,10 @@ int main(void) {
 	flagpedido=0;
 	InicializarClientes(listaClientes, TAM);
 	InicializarPedidos(listaPedidos, TAMPE);
-	PedirCadena(auxcalle, "ingrese cadena", TAMCAD);
-	printf("%s",auxcalle);
 	do
 	{	printf("MENU DE OPCIONES\n");
 		printf("----------------\n");
-		Menu(&respuesta, "1-Alta de cliente:\n2-Modificar datos de cliente:\n3-Baja de cliente:\n4-Crear pedido de recolección:\n5-Procesar residuos:\n6-Imprimir Clientes:\n7-Imprimir Pedidos pendientes:\n8-Imprimir Pedidos procesados:\n9-Cantidad de pedidos por localidad\n10-PP promedio por cliente\n11-Salir\n", "Opcion no valida, ingrese otra", 11, 1);
+		Menu(&respuesta, "1-Alta de cliente:\n2-Modificar datos de cliente:\n3-Baja de cliente:\n4-Crear pedido de recolección:\n5-Procesar residuos:\n6-Imprimir Clientes:\n7-Imprimir Pedidos pendientes:\n8-Imprimir Pedidos procesados:\n9-Cantidad de pedidos por localidad\n10-PP promedio por cliente\n11-Cliente con mas pedidos \n12-Cliente con mas pedidos procesados\n13-Cliente con mas pedidos pendientes\n15-Salir\n", "Opcion no valida, ingrese otra", 15, 1);
 		switch(respuesta)
 		{
 			case 1:
@@ -170,8 +168,7 @@ int main(void) {
 					if(flagpedido==1)
 					{
 						InformarPedidoS(listaClientes, listaPedidos, TAM, 1);
-						printf("sale de informar pedidos\n");
-						PedirEntero(&auxid, "Ingrese el ID del pedidi para procesar el pedido de recoleccion:",100,1100);
+						PedirEntero(&auxid, "Ingrese el ID del pedido para procesar el pedido de recoleccion:",100,1100);
 						auxrespuesta=ProcesarPedido(listaPedidos, TAMPE, auxid);
 						if(auxrespuesta==0)
 						{
@@ -278,7 +275,65 @@ int main(void) {
 					system("pause");
 				}
 						break;
+			case 11:
+				if(flagopcion==1)
+				{
+					if(flagpedido==1)
+					{
+						InformarClienteMasPedidoPendientes(listaClientes, TAM);
+					}
+					else
+					{
+						printf("primero se tiene que agregar un pedido\n");
+						system("pause");
+					}
+				}
+				else
+				{
+					printf("primero tiene que ingresar un cliente!\n");
+					system("pause");
+				}
+					break;
+			case 12:
+			if(flagopcion==1)
+			{
+				if(flagpedido==1)
+				{
+					InformarClienteMasPedidoProcesados(listaClientes, TAM);
+				}
+				else
+				{
+					printf("primero se tiene que agregar un pedido\n");
+					system("pause");
+				}
+			}
+			else
+			{
+				printf("primero tiene que ingresar un cliente!\n");
+				system("pause");
+			}
+					break;
+			case 13:
+				if(flagopcion==1)
+				{
+					if(flagpedido==1)
+					{
+						InformarClienteMasPedidoPendientes(listaClientes, TAM);
+					}
+					else
+					{
+						printf("primero se tiene que agregar un pedido\n");
+						system("pause");
+					}
+				}
+				else
+				{
+					printf("primero tiene que ingresar un cliente!\n");
+					system("pause");
+				}
+					break;
+
 		}
-	}while(respuesta!=11);
+	}while(respuesta!=15);
 	return EXIT_SUCCESS;
 }

@@ -85,4 +85,7 @@ void InformarPendientesporLocalidad(Cliente listacliente[],int tamanio,char loca
 /// \param listapedido lista de los pedidos
 /// \param tamaniopedido tamanio de la lista de los pedidos
 void InformarPromedioPP(Cliente listacliente[],int tamanio,Pedido listapedido[],int tamaniopedido);
+void InformarClienteMasPedidoPendientes(Cliente lista[],int tamanio);
+void InformarClienteMasPedidoProcesados(Cliente lista[],int tamanio);
+void InformarClienteMasPedidos(Cliente lista[],int tamanio);
 #endif /* INFORMES_H_ */

@@ -49,8 +49,9 @@ void InicializarClientes(Cliente lista[],int tamanio);
 /// \param lista lista de los clientes
 /// \param tamanio tamanio de la lista de los clientes
 /// \param index indice de la lista de los clientes donde se van a verificar que tenga pedido
+/// \param estado 1 si es pendiente, -1 si es procesado y 0 si es total
 /// \return retorna la cantidad de pedidos que tiene el cliente
-int ContadorPedidos(Cliente lista[],int tamanio,int index);
+int ContadorPedidos(Cliente lista[],int tamanio,int index,int estado);
 /// \fn void BuscarCliente(Cliente[], int, int*, int)
 /// \brief Busca un cliente en especifico a traves de su ID y devuelve el indice donde se encuentra
 ///
@@ -160,5 +161,6 @@ void PedidosporLocalidad(Cliente listacliente[],int tamanio,char localidad[],int
 /// \param tamanio tamanio de la lista
 /// \return devuelve la cantidad de clientes
 int CantidadClientes(Cliente lista[],int tamanio);
+int ClienteconMasPedidos(Cliente lista[],int tamanio,int estado);
 
 #endif /* CLIENTE_H_ */

@@ -44,8 +44,10 @@ void InformarCliente(Cliente lista[],int tamanio,int index,int totalOrdenes)
 	{
 		for(j=0;j<=10;j++)
 		{
+			printf("%d\n",index);
 			if(lista[index].IsEmpty==1)
 			{
+				printf("%d\n",index);
 				printf("%d         %s        %I64d           %s%d         %s                     %d\n",lista[index].ID,lista[index].nombre,lista[index].cuit,lista[index].direccion.Calle,lista[index].direccion.numeracion,lista[index].localidad,totalOrdenes);
 				break;
 			}
@@ -59,7 +61,7 @@ void InformarClienteS(Cliente lista[],int tamanio)
 	printf("ID           NOMBRE            CUIT               DIRECCION           LOCALIDAD            CANTIDAD DE PEDIDOS PENDIENTES\n");
 	for(i=0;i<tamanio;i++)
 	{
-		cantidad=ContadorPedidos(lista, tamanio, i);
+		cantidad=ContadorPedidos(lista, tamanio, i,1);
 		InformarCliente(lista, tamanio, i,cantidad);
 	}
 }
@@ -138,4 +140,34 @@ void InformarPromedioPP(Cliente listacliente[],int tamanio,Pedido listapedido[],
 	pptotal=CalcularTotalPP(listapedido, tamaniopedido);
 	promedio=pptotal/clientes;
 	printf("El promedio de PP por cliente es:%.2f (%.2f/%d)\n",promedio,pptotal,clientes);
+}
+void InformarClienteMasPedidos(Cliente lista[],int tamanio)
+{
+	int index;
+	int contadorpedidos;
+	index=ClienteconMasPedidos(lista, tamanio,0);
+	contadorpedidos=ContadorPedidos(lista, tamanio, index,0);
+	printf("El cliente con mas pedidos es:\n");
+	InformarCliente(lista, tamanio, index, contadorpedidos);
+
+}
+void InformarClienteMasPedidoProcesados(Cliente lista[],int tamanio)
+{
+	int index;
+	int contadorpedidos;
+	index=ClienteconMasPedidos(lista, tamanio,-1);
+	contadorpedidos=ContadorPedidos(lista, tamanio, index,-1);
+	printf("El cliente con mas pedidos procesados es:\n");
+	InformarCliente(lista, tamanio, index, contadorpedidos);
+
+}
+void InformarClienteMasPedidoPendientes(Cliente lista[],int tamanio)
+{
+	int index;
+	int contadorpedidos;
+	index=ClienteconMasPedidos(lista, tamanio,1);
+	contadorpedidos=ContadorPedidos(lista, tamanio, index,1);
+	printf("El cliente con mas pedidos pendientes es:\n");
+	InformarCliente(lista, tamanio, index, contadorpedidos);
+
 }

@@ -142,7 +142,7 @@ int DarBajaCliente(Cliente lista[],int tamanio,int id)
 	 }
 	 return retorno;
  }
-int ContadorPedidos(Cliente lista[],int tamanio,int index)
+int ContadorPedidos(Cliente lista[],int tamanio,int index,int estado)
 {
 	int cantidad;
 	int j;
@@ -151,10 +151,34 @@ int ContadorPedidos(Cliente lista[],int tamanio,int index)
 	{
 		for(j=0;j<=10;j++)
 		{
-			if(lista[index].estado[j]==1)
+			if(estado==1)
 			{
+				if(lista[index].IsEmpty==1&&lista[index].estado[j]==1)
+				{
 				cantidad++;
+				}
 			}
+			else
+			{
+				if(estado==-1)
+				{
+					if(lista[index].IsEmpty==1&&lista[index].estado[j]==-1)
+					{
+						cantidad++;
+					}
+				}
+				else
+				{
+					if(estado==0)
+					{
+						if(lista[index].IsEmpty==1&&lista[index].estado[j]!=0)
+						{
+							cantidad++;
+						}
+					}
+				}
+			}
+
 		}
 	}
 	return cantidad;
@@ -250,4 +274,27 @@ int CantidadClientes(Cliente lista[],int tamanio)
 		}
 	}
 	return total;
+}
+int ClienteconMasPedidos(Cliente lista[],int tamanio,int estado)
+{
+	int maximo;
+	int indicemaximo;
+	int contador;
+	int i;
+	maximo=0;
+	contador=0;
+	if(lista!=0&&tamanio>0)
+	{
+		for(i=0;i<tamanio;i++)
+		{
+			contador=ContadorPedidos(lista, tamanio,i,estado);
+			if(maximo==0||contador>maximo)
+			{
+				maximo=contador;
+				indicemaximo=i;
+			}
+		}
+	}
+	printf("%d\n",indicemaximo);
+	return indicemaximo;
 }
